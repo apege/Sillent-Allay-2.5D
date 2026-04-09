@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: caee232ba18e1954196f07bf73d0a04e
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bedding_Material
+    second: {fileID: 2100000, guid: dd1c34c6c877e9e4e90917fb070a8986, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props_Material
+    second: {fileID: 2100000, guid: d9fdf2d1ec59e8640ab2ab03dce64c38, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Structure_Material
+    second: {fileID: 2100000, guid: 109efe2c145015749b2418a5b1f607bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tarp_Material
+    second: {fileID: 2100000, guid: b19a351e34e0df1418739a037649e538, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Bedding_BaseColor.1001
+    second: {fileID: 2800000, guid: 346d7dbc038bc3241b9c7e9a20c90326, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Bedding_Metallic.1001
+    second: {fileID: 2800000, guid: dbe74ec83ac3a6847ab67620b50b0901, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Bedding_Normal.1001
+    second: {fileID: 2800000, guid: cdc6a4b6ea02024438047420c070e135, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Bedding_Roughness.1001
+    second: {fileID: 2800000, guid: 61e7a9ec08e8fd34b9ae273c076994d3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Structure_BaseColor.1001
+    second: {fileID: 2800000, guid: 2c912231d10d9934fa002670aea07f65, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Structure_Metallic.1001
+    second: {fileID: 2800000, guid: d2bd73c8eeeaf024ab2440666883c5c8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Structure_Normal.1001
+    second: {fileID: 2800000, guid: 03e996dfa0e31104e8c1abb633e25f23, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Structure_Roughness.1001
+    second: {fileID: 2800000, guid: 1fcbd6818859f4e4aab03451bf778a0d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Tarp_BaseColor.1001
+    second: {fileID: 2800000, guid: da72d100c0536744f8a795027b4fbfa5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Tarp_Metallic.1001
+    second: {fileID: 2800000, guid: a1004c6d9c3460b468e3dc2ca21e4a5c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Tarp_Normal.1001
+    second: {fileID: 2800000, guid: 8d0e9620bced4ea4c8c583a51f556c63, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: MAKESHIFTTENT_Tarp_Roughness.1001
+    second: {fileID: 2800000, guid: 1ac86364544259a488107885ad30f5f1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: props_Props_Material_BaseColor.1001
+    second: {fileID: 2800000, guid: 4800542bf4a4a5445abd277fb9222164, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: props_Props_Material_Emissive.1001
+    second: {fileID: 2800000, guid: 4ee9ebacfb319a344ba3cfc6d5e4d8a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: props_Props_Material_Metallic.1001
+    second: {fileID: 2800000, guid: 1b0bb08b18bfcee4f9437a923dacc939, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: props_Props_Material_Normal.1001
+    second: {fileID: 2800000, guid: c50f8b8f19c0df948a2656987d95450b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: props_Props_Material_Roughness.1001
+    second: {fileID: 2800000, guid: f416efb92473ff443b8c5d6aa770d0e5, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

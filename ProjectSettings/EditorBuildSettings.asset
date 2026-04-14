@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Desa_Main.unity
     guid: c7f10c64ebff9034aba4cb3ad2e55422
   - enabled: 1
-    path: Assets/Scenes/Sekolah_lt1.unity
+    path: Assets/Scenes/Interior School/Sekolah_lt1.unity
     guid: 75eb33d4d5029024eae4aa037807e478
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

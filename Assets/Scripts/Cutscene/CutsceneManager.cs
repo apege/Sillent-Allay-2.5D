@@ -106,6 +106,6 @@ public class CutsceneManager : MonoBehaviour
     void OnCutsceneEnd()
     {
         Debug.Log("Cutscene selesai, masuk game!");
-        SceneManager.LoadSceneAsync("Desa_Rumah_Nara"); // uncomment kalau mau load scene
+        SceneManager.LoadSceneAsync("Sekolah_lt1"); // uncomment kalau mau load scene
     }
 }

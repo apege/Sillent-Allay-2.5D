@@ -1,6 +1,12 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< HEAD
 --- !u!114 &-3265517028214746616
+=======
+<<<<<<< HEAD
+=======
+--- !u!114 &-8856057526861019958
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,6 +19,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
+=======
+>>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -39,7 +49,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: d5f837706e2812047b982173794be896, type: 3}
+=======
+<<<<<<< HEAD
+        m_Texture: {fileID: 2800000, guid: a5228297cbde98d43a6c64a1d3c9ce32, type: 3}
+=======
+        m_Texture: {fileID: 2800000, guid: 1e1563c4040376146817567a98cd11bf, type: 3}
+>>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: -2.7000022}
     - _BumpMap:
@@ -63,7 +81,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: d5f837706e2812047b982173794be896, type: 3}
+=======
+<<<<<<< HEAD
+        m_Texture: {fileID: 2800000, guid: a5228297cbde98d43a6c64a1d3c9ce32, type: 3}
+=======
+        m_Texture: {fileID: 2800000, guid: 1e1563c4040376146817567a98cd11bf, type: 3}
+>>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: -2.7000022}
     - _MetallicGlossMap:
@@ -130,7 +156,15 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+<<<<<<< HEAD
     - _Color: {r: 0, g: 0, b: 0, a: 1}
+=======
+<<<<<<< HEAD
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+=======
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+>>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

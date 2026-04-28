@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: fca81f5a1eeb26e41b3418f15698c613
+  - enabled: 1
+    path: Assets/Scenes/Cutscene/Cutscene.unity
+    guid: b2bb6bad5c3f7a749866b0560f72e42b
+  - enabled: 1
+    path: Assets/Scenes/Desa.unity
+    guid: 82cd321d6514b904bb440a1cbe342284
+  - enabled: 1
+    path: Assets/Scenes/Desa_Sekolah.unity
+    guid: dc4fcb0ec5120df48b1e39ba07c96743
+  - enabled: 1
+    path: Assets/Scenes/Desa_Rumah_Nara.unity
+    guid: 95fba472d0dd9c14dbecc6f0dab76c2c
+  - enabled: 1
+    path: Assets/Scenes/Desa_Main.unity
+    guid: c7f10c64ebff9034aba4cb3ad2e55422
+  - enabled: 1
+    path: Assets/Scenes/Interior School/Sekolah_lt1.unity
+    guid: 75eb33d4d5029024eae4aa037807e478
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_UseUCBPForAssetBundles: 0

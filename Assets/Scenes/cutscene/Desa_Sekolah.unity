@@ -413,7 +413,10 @@ MonoBehaviour:
   dialogLines:
   - Tenang kok, ga ada apa-apa.
   typingSpeed: 0.05
+  autoAdvanceDelay: 1.5
   showOnlyOnce: 0
+  nextDialog: {fileID: 0}
+  delayBeforeNextDialog: 0.5
   dialogBox: {fileID: 1388530761}
   dialogText: {fileID: 1040543112}
   npcNameText: {fileID: 0}
@@ -4537,7 +4540,10 @@ MonoBehaviour:
   dialogLines:
   - Naraaa, Hati Hati!!!
   typingSpeed: 0.05
+  autoAdvanceDelay: 1.5
   showOnlyOnce: 0
+  nextDialog: {fileID: 0}
+  delayBeforeNextDialog: 0.5
   dialogBox: {fileID: 1388530761}
   dialogText: {fileID: 1040543112}
   npcNameText: {fileID: 0}
@@ -7614,7 +7620,10 @@ MonoBehaviour:
   dialogLines:
   - "Eh\u2026 Nara ya? Tumben sendirian, cantik banget sore ini."
   typingSpeed: 0.05
-  showOnlyOnce: 0
+  autoAdvanceDelay: 1
+  showOnlyOnce: 1
+  nextDialog: {fileID: 1759537156}
+  delayBeforeNextDialog: 1
   dialogBox: {fileID: 1388530761}
   dialogText: {fileID: 1040543112}
   npcNameText: {fileID: 0}
@@ -9967,7 +9976,10 @@ MonoBehaviour:
   dialogLines:
   - Haha, jangan malu gitu dong, neng. Sini ngobrol
   typingSpeed: 0.05
+  autoAdvanceDelay: 1.5
   showOnlyOnce: 0
+  nextDialog: {fileID: 0}
+  delayBeforeNextDialog: 0.5
   dialogBox: {fileID: 1388530761}
   dialogText: {fileID: 1040543112}
   npcNameText: {fileID: 0}

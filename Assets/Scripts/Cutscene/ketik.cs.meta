@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d3cecaab1ad78de4f810d1bd5287eba3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - teksTMP: {instanceID: 0}
+  - sfxNangis: {instanceID: 0}
+  - kotakDialogUI: {instanceID: 0}
+  - kameraCutscene: {instanceID: 0}
+  - playerUtama: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

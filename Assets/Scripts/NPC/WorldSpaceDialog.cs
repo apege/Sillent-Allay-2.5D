@@ -120,9 +120,14 @@ public class WorldSpaceDialog : MonoBehaviour
 
     public void ShowDialog()
     {
+        // Kalau tidak ada UI references, skip aja (optional)
         if (dialogBox == null || dialogText == null)
         {
-            Debug.LogError("[WorldDialog] UI references NULL!");
+            if (debugMode) Debug.Log("[WorldDialog] No UI references, skipping: " + npcName);
+
+            // Tetap jalankan chain ke dialog berikutnya kalau ada
+            if (dialogLines.Length > 0)
+                StartCoroutine(PlayAllLines());
             return;
         }
 

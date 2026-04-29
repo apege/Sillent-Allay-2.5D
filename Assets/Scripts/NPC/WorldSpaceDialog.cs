@@ -152,27 +152,26 @@ public class WorldSpaceDialog : MonoBehaviour
             currentLineIndex = i;
             yield return StartCoroutine(TypeText(dialogLines[i]));
 
-            // Jeda antar baris (kecuali baris terakhir)
             if (i < dialogLines.Length - 1)
                 yield return new WaitForSeconds(autoAdvanceDelay);
         }
 
-        // Semua baris selesai — chain ke dialog berikutnya
         if (nextDialog != null)
         {
             if (debugMode) Debug.Log("[WorldDialog] Chaining ke: " + nextDialog.npcName);
             yield return new WaitForSeconds(delayBeforeNextDialog);
 
-            // Hide dulu dialog ini, baru start dialog berikutnya
-            HideDialog();
-            yield return new WaitForSeconds(0.35f); // Tunggu fade out selesai
+            // Jangan pakai HideDialog() di sini — nanti bunuh coroutine ini sendiri
+            // Langsung fade out manual, lalu lanjut
+            isDialogActive = false;
+            yield return StartCoroutine(FadeDialog(false));
+
             nextDialog.ShowDialog();
         }
         else
         {
-            // Tidak ada chain, tunggu sebentar lalu hide
             yield return new WaitForSeconds(autoAdvanceDelay);
-            HideDialog();
+            HideDialog(); // Ini aman karena tidak ada yang perlu dilanjut setelahnya
         }
     }
 

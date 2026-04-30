@@ -130,6 +130,7 @@ public class DoorInteraction : MonoBehaviour
     private void SetInRange(bool inRange)
     {
         _playerInRange = inRange;
+        Debug.Log($"[DoorInteraction] SetInRange: {inRange}, promptUI: {promptUI}");
 
         if (promptUI != null)
             promptUI.SetActive(inRange);

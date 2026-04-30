@@ -285,7 +285,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &4652637669577089508
 MonoBehaviour:
@@ -1508,22 +1508,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1da77295ca638489dc3841e64dd10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMenu
-  inventoryPanel: {fileID: 7162902666869101263}
-  tabButtons:
-  - {fileID: 4689255566458388420}
-  - {fileID: 7656352755011797151}
-  - {fileID: 8595780975500006178}
-  - {fileID: 5666151548080734261}
-  - {fileID: 3241491253188808621}
-  tabHighlights: []
-  contentPanels:
-  - {fileID: 449313793975432374}
-  - {fileID: 5833276579240851158}
-  - {fileID: 6651707169473902173}
-  - {fileID: 3328181181170011476}
-  - {fileID: 3613402470299729056}
-  backButton: {fileID: 4045630949183419978}
-  pauseOnOpen: 0
+  Tabs: []
+  TabsButton: []
+  InactiveTabBG: {fileID: 0}
+  ActiveTabBG: {fileID: 0}
+  InactiveTabButtonSize: {x: 0, y: 0}
+  ActiveButtonSize: {x: 0, y: 0}
+  InventoryPanel: {fileID: 0}
 --- !u!1 &8092684578818622195
 GameObject:
   m_ObjectHideFlags: 0

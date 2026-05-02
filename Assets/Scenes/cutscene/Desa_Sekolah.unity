@@ -2171,12 +2171,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'foot.R'\n\tTransform 'midfinger4.R'\n\tTransform
-    'upfinger3.L'\n\tTransform 'upperleg.R'\n\tTransform 'hip'\n\tTransform 'upfinger2.L'\n\tTransform
-    'foot.L'\n\tTransform 'upfinger4.L'\n\tTransform 'lowerfinger3.L'\n\tTransform
-    'midfinger2.L'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -4543,7 +4538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldSpaceDialog
   dialogLines:
-  - Naraaa, Hati Hati!!!
+  - Halloo naraa
   typingSpeed: 0.05
   autoAdvanceDelay: 1.5
   showOnlyOnce: 0
@@ -7725,7 +7720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldSpaceDialog
   dialogLines:
-  - "Eh\u2026 Nara ya? Tumben sendirian, cantik banget sore ini."
+  - "Eh\u2026 Nara ya? Sendiri mulu, makin cantik banget nengg."
   typingSpeed: 0.05
   autoAdvanceDelay: 1
   showOnlyOnce: 1
@@ -7777,12 +7772,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'foot.R'\n\tTransform 'midfinger4.R'\n\tTransform
-    'upfinger3.L'\n\tTransform 'upperleg.R'\n\tTransform 'hip'\n\tTransform 'upfinger2.L'\n\tTransform
-    'foot.L'\n\tTransform 'upfinger4.L'\n\tTransform 'lowerfinger3.L'\n\tTransform
-    'midfinger2.L'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -10506,12 +10496,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'foot.R'\n\tTransform 'midfinger4.R'\n\tTransform
-    'upfinger3.L'\n\tTransform 'upperleg.R'\n\tTransform 'hip'\n\tTransform 'upfinger2.L'\n\tTransform
-    'foot.L'\n\tTransform 'upfinger4.L'\n\tTransform 'lowerfinger3.L'\n\tTransform
-    'midfinger2.L'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -10974,7 +10959,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -380.67, y: 75}
+  m_AnchoredPosition: {x: -308, y: 66}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865535667

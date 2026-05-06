@@ -1,0 +1,3 @@
+repository "Sillent Allay 2.5D/Sillent Allay 2.5D@1375102857755@cloud"
+  path "/"
+    smartbranch "/main"

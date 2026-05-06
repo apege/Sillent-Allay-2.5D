@@ -1920,18 +1920,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldSpaceDialog
   dialogLines:
-  - "Eh\u2026 Nara ya? Sendiri mulu, makin cantik banget nengg."
+  - "Nara\u2026 boleh Bu Siti ngobrol sebentar?\n"
   typingSpeed: 0.05
   autoAdvanceDelay: 1
   showOnlyOnce: 1
   nextDialog: {fileID: 0}
   delayBeforeNextDialog: 1
-  dialogBox: {fileID: 0}
-  dialogText: {fileID: 0}
+  dialogBox: {fileID: 1388530761}
+  dialogText: {fileID: 1249672119}
   npcNameText: {fileID: 0}
-  npcName: ripan
-  dialogOffset: {x: 2.7, y: 2.8, z: 0}
-  followNPC: 0
+  npcName: bu siti
+  dialogOffset: {x: 0, y: 2.8, z: 0.1}
+  followNPC: 1
   triggerDistance: 2
   debugMode: 1
 --- !u!65 &197151025
@@ -5573,7 +5573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nara\u2026 boleh Bu Siti ngobrol sebentar?\n"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

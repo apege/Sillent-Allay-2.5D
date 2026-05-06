@@ -2,6 +2,8 @@
 %TAG !u! tag:unity3d.com,2011:
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 --- !u!114 &-6982509209726982406
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -16,6 +18,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -34,11 +37,16 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
 <<<<<<< HEAD
+  stringTagMap:
+    RenderType: Opaque
+=======
+<<<<<<< HEAD
   stringTagMap: {}
 =======
   stringTagMap:
     RenderType: Opaque
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -138,11 +146,31 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.037108235, g: 0.014024691, b: 0.0029589247, a: 1}
 <<<<<<< HEAD
+    - _Color: {r: 0.037108235, g: 0.01402469, b: 0.0029589247, a: 1}
+=======
+<<<<<<< HEAD
     - _Color: {r: 0.037108235, g: 0.014024691, b: 0.0029589247, a: 1}
 =======
     - _Color: {r: 0.037108235, g: 0.01402469, b: 0.0029589247, a: 1}
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+<<<<<<< HEAD
+--- !u!114 &4788890518670532140
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
+  version: 10
+=======
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665

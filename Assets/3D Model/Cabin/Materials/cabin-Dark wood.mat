@@ -32,10 +32,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
 <<<<<<< HEAD
+        m_Texture: {fileID: 2800000, guid: c465fb557936457448ec2ddc3087ab77, type: 3}
+=======
+<<<<<<< HEAD
         m_Texture: {fileID: 2800000, guid: 920552890644e6043a9c3c27ea9deeaa, type: 3}
 =======
         m_Texture: {fileID: 2800000, guid: 23eb69736f7a7d8458c36cd6b95033f0, type: 3}
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -128,8 +132,12 @@ Material:
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 <<<<<<< HEAD
+--- !u!114 &4698110996099782252
+=======
+<<<<<<< HEAD
 =======
 --- !u!114 &404381136095305361
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,4 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
+=======
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665

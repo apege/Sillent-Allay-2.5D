@@ -52,11 +52,11 @@ public class CutsceneManager : MonoBehaviour
         // Munculin teks di background gelap
         yield return StartCoroutine(FadeText(subtitleText, 0f, 1f, 1f));
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
 
         // Fade out teks, fade out black overlay → masuk game
-        yield return StartCoroutine(FadeText(subtitleText, 1f, 0f, 0.5f));
-        yield return new WaitForSeconds(10f);
+        yield return StartCoroutine(FadeText(subtitleText, 1f, 0f, 0.3f));
+        yield return new WaitForSeconds(1f);
 
 
         // Load scene / enable player input dsb

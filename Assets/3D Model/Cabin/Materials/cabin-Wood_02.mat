@@ -18,11 +18,16 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
 <<<<<<< HEAD
+  stringTagMap:
+    RenderType: Opaque
+=======
+<<<<<<< HEAD
   stringTagMap: {}
 =======
   stringTagMap:
     RenderType: Opaque
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -127,8 +132,12 @@ Material:
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 <<<<<<< HEAD
+--- !u!114 &3974421630338525007
+=======
+<<<<<<< HEAD
 =======
 --- !u!114 &1683021831320464455
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,4 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
   version: 10
+<<<<<<< HEAD
+=======
 >>>>>>> 559e4b53127c539f3325ada73f10e8b74407568b
+>>>>>>> b482941acf3da2862eba0d3256c618a2caa98665

@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
 
 public class InventoryMenu : MonoBehaviour
 {
@@ -18,7 +16,6 @@ public class InventoryMenu : MonoBehaviour
 
     void Awake()
     {
-        // Kalau sudah ada instance lain, destroy yang baru (duplikat dari scene)
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
@@ -26,8 +23,15 @@ public class InventoryMenu : MonoBehaviour
         }
 
         Instance = this;
+
+        // ✅ Kalau InventoryPanel belum jadi child, pindahin dulu
+        if (InventoryPanel != null && InventoryPanel.transform.parent != this.transform)
+        {
+            InventoryPanel.transform.SetParent(this.transform);
+        }
+
+        // ✅ Sekarang cukup DontDestroyOnLoad root-nya, Panel ikut otomatis
         DontDestroyOnLoad(this.gameObject);
-        DontDestroyOnLoad(InventoryPanel);
     }
 
     void OnEnable()
@@ -61,11 +65,17 @@ public class InventoryMenu : MonoBehaviour
 
     public void ToggleInventory()
     {
+        // ✅ Kalau null, coba cari lagi di scene
         if (InventoryPanel == null)
         {
-            Debug.LogError("InventoryPanel null!", this);
-            return;
+            InventoryPanel = GameObject.Find("InventoryPanel"); // sesuaikan nama object-nya
+            if (InventoryPanel == null)
+            {
+                Debug.LogError("InventoryPanel tidak ditemukan di scene!", this);
+                return;
+            }
         }
+
         isOpen = !isOpen;
         InventoryPanel.SetActive(isOpen);
     }

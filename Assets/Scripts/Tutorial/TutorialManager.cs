@@ -4,21 +4,6 @@ using UnityEngine;
 
 namespace Tutorial
 {
-    /// <summary>
-    /// TutorialManager — Controller utama sistem tutorial interaktif.
-    ///
-    /// Cara kerja:
-    ///   1. Saat game dimulai, manager memuat daftar TutorialStep.
-    ///   2. Setiap step ditampilkan via TutorialUI (fade in teks instruksi).
-    ///   3. TutorialInputDetector menunggu aksi player yang sesuai.
-    ///   4. Jika aksi terdeteksi, lanjut ke step berikutnya (fade out → fade in).
-    ///   5. Setelah semua step selesai, event OnTutorialCompleted dipanggil.
-    ///
-    /// Setup di Unity:
-    ///   - Buat GameObject kosong bernama "TutorialManager".
-    ///   - Pasang komponen ini, TutorialUI, dan TutorialInputDetector.
-    ///   - Isi daftar steps di Inspector, atau biarkan default (lihat InitDefaultSteps).
-    /// </summary>
     public class TutorialManager : MonoBehaviour
     {
         // ──────────────────────────────────────────────
@@ -41,10 +26,7 @@ namespace Tutorial
         //  Events
         // ──────────────────────────────────────────────
 
-        /// <summary>Dipanggil saat tutorial selesai (semua step atau di-skip).</summary>
         public System.Action OnTutorialCompleted;
-
-        /// <summary>Dipanggil setiap kali step berubah. Parameter: nomor step (0-based).</summary>
         public System.Action<int> OnStepChanged;
 
         // ──────────────────────────────────────────────
@@ -56,20 +38,21 @@ namespace Tutorial
         private bool _tutorialActive = false;
         private Coroutine _timerCoroutine;
 
+        // Key untuk menyimpan status tutorial
+        private const string TUTORIAL_DONE_KEY = "TutorialCompleted";
+
         // ──────────────────────────────────────────────
         //  Unity Lifecycle
         // ──────────────────────────────────────────────
 
         private void Awake()
         {
-            // Jika daftar steps kosong, gunakan preset default
             if (steps == null || steps.Count == 0)
                 InitDefaultSteps();
         }
 
         private void Start()
         {
-            // Setup event dari input detector dan tombol skip
             if (inputDetector != null)
                 inputDetector.OnActionDetected += HandleActionDetected;
 
@@ -79,13 +62,19 @@ namespace Tutorial
                 tutorialUI.SetTotalSteps(steps.Count);
             }
 
+            // Cek apakah tutorial sudah pernah selesai
+            if (PlayerPrefs.GetInt(TUTORIAL_DONE_KEY, 0) == 1)
+            {
+                tutorialUI?.gameObject.SetActive(false);
+                return;
+            }
+
             if (startOnAwake)
                 StartTutorial();
         }
 
         private void OnDestroy()
         {
-            // Bersihkan event listener agar tidak terjadi memory leak
             if (inputDetector != null)
                 inputDetector.OnActionDetected -= HandleActionDetected;
 
@@ -97,9 +86,6 @@ namespace Tutorial
         //  Public API
         // ──────────────────────────────────────────────
 
-        /// <summary>
-        /// Mulai tutorial dari step pertama.
-        /// </summary>
         public void StartTutorial()
         {
             if (_tutorialActive) return;
@@ -113,9 +99,6 @@ namespace Tutorial
             LoadCurrentStep();
         }
 
-        /// <summary>
-        /// Lewati semua sisa tutorial sekarang.
-        /// </summary>
         public void SkipTutorial()
         {
             if (!_tutorialActive) return;
@@ -149,12 +132,10 @@ namespace Tutorial
         {
             _isTransitioning = true;
 
-            // Tampilkan UI step (fade in)
             yield return StartCoroutine(tutorialUI.ShowStep(step, _currentStepIndex));
 
             _isTransitioning = false;
 
-            // Mulai mendeteksi input (kecuali UIIntroduction, gunakan timer)
             if (step.isTimedStep || step.requiredAction == TutorialActionType.UIIntroduction)
             {
                 _timerCoroutine = StartCoroutine(TimedStepRoutine(step.timedStepDuration));
@@ -193,13 +174,11 @@ namespace Tutorial
         {
             _isTransitioning = true;
 
-            // Fade out UI step saat ini
             yield return StartCoroutine(tutorialUI.HideStep());
 
             _currentStepIndex++;
             _isTransitioning = false;
 
-            // Muat step berikutnya
             LoadCurrentStep();
         }
 
@@ -210,23 +189,34 @@ namespace Tutorial
             yield return StartCoroutine(tutorialUI.HideStep());
 
             tutorialUI.SetSkipButtonVisible(false);
+
+            // Simpan bahwa tutorial sudah selesai
+            PlayerPrefs.SetInt(TUTORIAL_DONE_KEY, 1);
+            PlayerPrefs.Save();
+
             Debug.Log("[TutorialManager] Tutorial selesai.");
             OnTutorialCompleted?.Invoke();
         }
 
         // ──────────────────────────────────────────────
-        //  Default Steps (Fallback / Contoh)
+        //  Reset Tutorial (untuk testing)
         // ──────────────────────────────────────────────
 
-        /// <summary>
-        /// Inisialisasi 5 step tutorial default jika Inspector tidak diisi.
-        /// Gunakan ini sebagai referensi untuk mengisi langsung dari Inspector.
-        /// </summary>
+        [ContextMenu("Reset Tutorial")]
+        public void ResetTutorial()
+        {
+            PlayerPrefs.DeleteKey(TUTORIAL_DONE_KEY);
+            Debug.Log("[TutorialManager] Tutorial direset!");
+        }
+
+        // ──────────────────────────────────────────────
+        //  Default Steps
+        // ──────────────────────────────────────────────
+
         private void InitDefaultSteps()
         {
             steps = new List<TutorialStep>
             {
-                // ─── Step 1: Gerak kanan/kiri ───────────────────
                 new TutorialStep
                 {
                     stepTitle       = "Bergerak",
@@ -234,8 +224,6 @@ namespace Tutorial
                     requiredAction  = TutorialActionType.MoveHorizontal,
                     isTimedStep     = false
                 },
-
-                // ─── Step 2: Lompat ─────────────────────────────
                 new TutorialStep
                 {
                     stepTitle       = "Lompat",
@@ -243,8 +231,6 @@ namespace Tutorial
                     requiredAction  = TutorialActionType.Jump,
                     isTimedStep     = false
                 },
-
-                // ─── Step 3: Lari ───────────────────────────────
                 new TutorialStep
                 {
                     stepTitle       = "Berlari",
@@ -252,8 +238,6 @@ namespace Tutorial
                     requiredAction  = TutorialActionType.Sprint,
                     isTimedStep     = false
                 },
-
-                // ─── Step 4: Buka menu ──────────────────────────
                 new TutorialStep
                 {
                     stepTitle       = "Menu",
@@ -261,8 +245,6 @@ namespace Tutorial
                     requiredAction  = TutorialActionType.OpenMenu,
                     isTimedStep     = false
                 },
-
-                // ─── Step 5: Pengenalan UI ──────────────────────
                 new TutorialStep
                 {
                     stepTitle         = "Antarmuka Permainan",
@@ -270,7 +252,6 @@ namespace Tutorial
                     requiredAction    = TutorialActionType.UIIntroduction,
                     isTimedStep       = true,
                     timedStepDuration = 5f,
-                    // Opsional: highlight panel Health
                     highlightTargetName = "Panel_Health",
                     highlightColor      = new Color(1f, 0.85f, 0f, 0.5f)
                 }

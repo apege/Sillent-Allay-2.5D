@@ -1,15 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// Press E to Enter — versi door interaction.
-/// Reuse SceneTransitionManager yang sudah ada (sama seperti SceneTransitionTrigger).
-/// 
-/// Setup:
-///   1. Attach script ini ke GameObject pintu
-///   2. Tambahkan Collider / Collider2D, centang Is Trigger = TRUE
-///   3. Assign field di Inspector
-/// </summary>
 public class DoorInteraction : MonoBehaviour
 {
     [Header("Target Scene")]
@@ -18,26 +9,24 @@ public class DoorInteraction : MonoBehaviour
     [SerializeField] private bool useSceneName = true;
 
     [Header("Spawn Settings")]
-    [Tooltip("ID spawn point di scene tujuan (sama seperti di SceneTransitionTrigger)")]
+    [Tooltip("ID spawn point di scene tujuan")]
     [SerializeField] private string targetSpawnPointID;
 
     [Header("Prompt UI")]
-    [Tooltip("GameObject prompt 'Press E to Enter'")]
+    [Tooltip("Assign 'Prompt UI Canvas' (parent canvas), BUKAN GameObject 'E'")]
     [SerializeField] private GameObject promptUI;
 
     [Header("Gizmo")]
     [SerializeField] private Color gizmoColor = new Color(1f, 0.8f, 0f, 0.25f);
 
-    // ─────────────────────────
     private bool _playerInRange = false;
     private bool _hasTriggered = false;
     private InputAction _interactAction;
 
-    // ─────────────────────────
     private void Awake()
     {
         _interactAction = new InputAction("Interact", binding: "<Keyboard>/e");
-        _interactAction.AddBinding("<Gamepad>/buttonSouth"); // A (Xbox) / X (PS)
+        _interactAction.AddBinding("<Gamepad>/buttonSouth");
 
         if (promptUI != null)
             promptUI.SetActive(false);
@@ -55,10 +44,6 @@ public class DoorInteraction : MonoBehaviour
         _interactAction.Disable();
     }
 
-    // ─────────────────────────
-    // Deteksi player masuk / keluar area pintu
-    // Support 3D dan 2D sekaligus
-    // ─────────────────────────
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) SetInRange(true);
@@ -79,33 +64,33 @@ public class DoorInteraction : MonoBehaviour
         if (other.CompareTag("Player")) SetInRange(false);
     }
 
-    // ─────────────────────────
-    // Input
-    // ─────────────────────────
     private void OnInteractPerformed(InputAction.CallbackContext ctx)
     {
         if (_playerInRange && !_hasTriggered)
             TriggerTransition();
     }
 
-    // ─────────────────────────
-    // Transition — logika sama persis seperti SceneTransitionTrigger
-    // ─────────────────────────
     private void TriggerTransition()
     {
         if (SceneTransitionManager.Instance == null)
         {
-            Debug.LogError("[DoorInteraction] SceneTransitionManager tidak ditemukan! " +
-                           "Pastikan TransitionCanvas ada di scene.");
+            Debug.LogError("[DoorInteraction] SceneTransitionManager tidak ditemukan!");
             return;
         }
 
-        _hasTriggered = true;
+         _hasTriggered = true;
+
+        // Complete quest saat keluar
+        QuestTrigger questTrigger = GetComponent<QuestTrigger>();
+        if (questTrigger != null)
+            questTrigger.TriggerComplete();
 
         if (promptUI != null)
             promptUI.SetActive(false);
 
-        // Set spawn point tujuan (pakai sistem SpawnPointManager yang sudah ada)
+        if (promptUI != null)
+            promptUI.SetActive(false);
+
         if (!string.IsNullOrEmpty(targetSpawnPointID))
             SpawnPointManager.nextSpawnPointID = targetSpawnPointID;
 
@@ -121,12 +106,11 @@ public class DoorInteraction : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[DoorInteraction] Target scene tidak valid! Isi targetSceneName atau targetSceneIndex.");
+            Debug.LogError("[DoorInteraction] Target scene tidak valid!");
             _hasTriggered = false;
         }
     }
 
-    // ─────────────────────────
     private void SetInRange(bool inRange)
     {
         _playerInRange = inRange;
@@ -139,9 +123,6 @@ public class DoorInteraction : MonoBehaviour
             _hasTriggered = false;
     }
 
-    // ─────────────────────────
-    // Gizmo — biar kelihatan di Scene view
-    // ─────────────────────────
     private void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;

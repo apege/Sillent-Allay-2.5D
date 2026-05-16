@@ -16,22 +16,17 @@ public class InventoryMenu : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log($"[InventoryMenu] Awake dipanggil! Instance ada: {Instance != null}");
+
         if (Instance != null && Instance != this)
         {
+            Debug.Log("[InventoryMenu] Duplikat ditemukan, destroy!");
             Destroy(this.gameObject);
             return;
         }
 
         Instance = this;
-
-        // ✅ Kalau InventoryPanel belum jadi child, pindahin dulu
-        if (InventoryPanel != null && InventoryPanel.transform.parent != this.transform)
-        {
-            InventoryPanel.transform.SetParent(this.transform);
-        }
-
-        // ✅ Sekarang cukup DontDestroyOnLoad root-nya, Panel ikut otomatis
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.transform.root.gameObject);
     }
 
     void OnEnable()
@@ -49,6 +44,10 @@ public class InventoryMenu : MonoBehaviour
         isOpen = false;
         if (InventoryPanel != null)
             InventoryPanel.SetActive(false);
+
+        // ← 3 baris tambahan
+        if (QuestCanvasManager.Instance != null)
+            QuestCanvasManager.Instance.gameObject.SetActive(scene.name != "StartMenu");
     }
 
     void Start()
@@ -59,21 +58,18 @@ public class InventoryMenu : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "StartMenu") return;
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             ToggleInventory();
     }
 
     public void ToggleInventory()
     {
-        // ✅ Kalau null, coba cari lagi di scene
         if (InventoryPanel == null)
         {
-            InventoryPanel = GameObject.Find("InventoryPanel"); // sesuaikan nama object-nya
-            if (InventoryPanel == null)
-            {
-                Debug.LogError("InventoryPanel tidak ditemukan di scene!", this);
-                return;
-            }
+            Debug.LogError("InventoryPanel null!", this);
+            return;
         }
 
         isOpen = !isOpen;

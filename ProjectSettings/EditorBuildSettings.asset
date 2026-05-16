@@ -32,6 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Interior School/Sekolah_lt1.unity
     guid: 75eb33d4d5029024eae4aa037807e478
+  - enabled: 1
+    path: Assets/Scenes/Desa_Pasar.unity
+    guid: 230481d5554aecf4ebee86bc2e5c7b79
+  - enabled: 1
+    path: Assets/Scenes/cutscene/Desa_Sekolah.unity
+    guid: 0fdebdc3162a4a74d90efd55b6ff6ad5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

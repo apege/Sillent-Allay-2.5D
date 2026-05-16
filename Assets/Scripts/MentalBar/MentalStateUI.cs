@@ -53,29 +53,34 @@ public class MentalStateUI : MonoBehaviour
     //  INISIALISASI
     // ============================================================
     private void Start()
+{
+    _manager = MentalStateManager.Instance;
+    
+    if (_manager == null)
     {
-        // Cari MentalStateManager secara otomatis
-        _manager = MentalStateManager.Instance;
-
-        if (_manager == null)
-        {
-            Debug.LogError("[MentalStateUI] MentalStateManager tidak ditemukan! " +
-                           "Pastikan ada GameObject dengan MentalStateManager di scene.");
-            return;
-        }
-
-        // Daftarkan diri ke event onStatsChanged
-        // Setiap kali stats berubah, UpdateUI() akan dipanggil
-        _manager.onStatsChanged.AddListener(UpdateUI);
-
-        // Setup nilai min/max slider
-        SetupSliders();
-
-        // Update UI pertama kali
-        UpdateUI();
-
-        Debug.Log("[MentalStateUI] UI berhasil terhubung ke MentalStateManager.");
+        Debug.LogWarning("[MentalStateUI] Manager belum ada, coba lagi...");
+        Invoke(nameof(Init), 0.1f);
+        return;
     }
+    
+    Init();
+}
+
+private void Init()
+{
+    _manager = MentalStateManager.Instance;
+    
+    if (_manager == null)
+    {
+        Debug.LogError("[MentalStateUI] MentalStateManager tidak ditemukan!");
+        return;
+    }
+
+    _manager.onStatsChanged.AddListener(UpdateUI);
+    SetupSliders();
+    UpdateUI();
+    Debug.Log("[MentalStateUI] UI berhasil terhubung ke MentalStateManager.");
+}
 
     /// <summary>
     /// Pastikan semua slider punya nilai min 0 dan max 1.

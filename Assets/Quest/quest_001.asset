@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: quest_001
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   questID: quest_001
-  questName: Cari jalan pulang
-  questDescription: Cari jalan yang aman agar mental dan keberanian karakter anda
-    aman!
+  questName: Menyusuri lorong dan Keluar dari sekolah
+  questDescription: 'Susuri lorong sekolah lalu keluar sekolah untuk pergi pulang
+
+'
   status: 1

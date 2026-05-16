@@ -1,34 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Hapus jika tidak pakai TextMeshPro, ganti TMP_Text dengan Text
+using TMPro;
 
 // ============================================================
 //  CharacterPanelDisplay.cs
 //  Script untuk menampilkan 4 kotak di tab Character.
-//  Setiap kotak otomatis ganti gambar berdasarkan nilai
-//  Mental State (Trauma, Courage, Sanity) dari MentalStateManager.
-//
-//  SETUP DI UNITY:
-//  1. Attach script ini ke GameObject "CharacterPanel" (atau Canvas)
-//  2. Isi 4 slot Image di Inspector
-//  3. Isi sprite-sprite sesuai kondisi di Inspector
-//  4. Jalankan — gambar otomatis ganti sesuai kondisi karakter
+//  Kotak 2 (Trait) otomatis ngambil data dari GameData
+//  sesuai pilihan player di awal game.
 // ============================================================
 
 public class CharacterPanelDisplay : MonoBehaviour
 {
     // ----------------------------------------------------------
     // REFERENSI 4 KOTAK IMAGE DI UI
-    // Drag komponen Image dari setiap kotak ke sini
     // ----------------------------------------------------------
     [Header("=== 4 Kotak Image di Character Panel ===")]
-    public Image box1_StatusMental;    // Kotak 1: Status Mental
-    public Image box2_Trait;           // Kotak 2: Trait / Kepribadian
-    public Image box3_Memory;          // Kotak 3: Kenangan terakhir
-    public Image box4_Relationship;    // Kotak 4: Hubungan / Mood sosial
+    public Image box1_StatusMental;
+    public Image box2_Trait;
+    public Image box3_Memory;
+    public Image box4_Relationship;
 
     // ----------------------------------------------------------
-    // LABEL TEKS DI BAWAH SETIAP KOTAK (opsional)
+    // LABEL TEKS (opsional)
     // ----------------------------------------------------------
     [Header("=== Label Teks (Opsional) ===")]
     public TMP_Text box1_Label;
@@ -38,54 +31,64 @@ public class CharacterPanelDisplay : MonoBehaviour
 
     // ==========================================================
     // KOTAK 1 — STATUS MENTAL
-    // Ganti gambar sesuai kondisi Sanity & Trauma
     // ==========================================================
     [Header("=== Kotak 1: Sprite Status Mental ===")]
     [Tooltip("Sanity > 70 dan Trauma < 30")]
-    public Sprite statusStabil;         // Contoh: wajah tenang
+    public Sprite statusStabil;
 
     [Tooltip("Sanity 30-70 atau Trauma 30-60")]
-    public Sprite statusTertekan;       // Contoh: wajah khawatir
+    public Sprite statusTertekan;
 
     [Tooltip("Sanity < 30 atau Trauma > 75")]
-    public Sprite statusTrauma;         // Contoh: wajah panik/ketakutan
+    public Sprite statusTrauma;
 
     // ==========================================================
-    // KOTAK 2 — TRAIT / KEPRIBADIAN
-    // Bisa diset manual (tidak berubah-ubah)
+    // KOTAK 2 — TRAIT (otomatis dari GameData)
     // ==========================================================
     [Header("=== Kotak 2: Sprite Trait Karakter ===")]
-    [Tooltip("Sprite trait yang dipasang permanent")]
-    public Sprite traitSprite;          // Contoh: icon introvert, empatik, dll
+    [Tooltip("Sprite untuk trait Introvert")]
+    public Sprite traitSpriteIntrovert;
 
-    [Tooltip("Nama trait yang ditampilkan")]
+    [Tooltip("Sprite untuk trait Empatik")]
+    public Sprite traitSpriteEmpatik;
+
+    [Tooltip("Sprite untuk trait Penakut")]
+    public Sprite traitSpritePenakut;
+
+    [Tooltip("Sprite untuk trait Pemberani")]
+    public Sprite traitSpritePemberani;
+
+    [Tooltip("Sprite untuk trait Sensitif")]
+    public Sprite traitSpriteSensitif;
+
+    [Tooltip("Sprite fallback kalau GameData kosong")]
+    public Sprite traitSprite;
+
+    [Tooltip("Label fallback kalau GameData kosong")]
     public string traitName = "Introvert";
 
     // ==========================================================
     // KOTAK 3 — KENANGAN / MEMORY
-    // Ganti gambar berdasarkan kejadian terbaru
     // ==========================================================
     [Header("=== Kotak 3: Sprite Kenangan ===")]
-    public Sprite memoryNormal;         // Belum ada kejadian besar
-    public Sprite memoryBullying;       // Setelah bertemu pembully
-    public Sprite memoryHealing;        // Setelah sesi healing/jurnal
-    public Sprite memoryBrave;          // Setelah tindakan berani
+    public Sprite memoryNormal;
+    public Sprite memoryBullying;
+    public Sprite memoryHealing;
+    public Sprite memoryBrave;
 
     // ==========================================================
     // KOTAK 4 — HUBUNGAN / MOOD SOSIAL
-    // Berubah berdasarkan Courage (keberanian sosial)
     // ==========================================================
     [Header("=== Kotak 4: Sprite Hubungan ===")]
-    public Sprite relationshipTerbuka;  // Courage >= 70: mudah bersosialisasi
-    public Sprite relationshipNormal;   // Courage 30-70: biasa
-    public Sprite relationshipTertutup; // Courage < 30: menarik diri
+    public Sprite relationshipTerbuka;
+    public Sprite relationshipNormal;
+    public Sprite relationshipTertutup;
 
     // ----------------------------------------------------------
-    // INTERNAL — tracking kejadian terakhir
+    // INTERNAL
     // ----------------------------------------------------------
     private MentalStateManager _manager;
 
-    // Enum untuk tipe kejadian terakhir
     public enum LastEvent { None, Bullying, Healing, Brave }
     [HideInInspector] public LastEvent lastEvent = LastEvent.None;
 
@@ -102,20 +105,18 @@ public class CharacterPanelDisplay : MonoBehaviour
             return;
         }
 
-        // Subscribe ke event perubahan stats
         _manager.onStatsChanged.AddListener(RefreshAllBoxes);
 
-        // Pasang trait (kotak 2) — nilainya tetap, langsung dipasang di Start
+        // Kotak 2: ambil trait dari GameData
         SetupTraitBox();
 
-        // Update pertama kali
         RefreshAllBoxes();
 
         Debug.Log("[CharacterPanel] Berhasil terhubung ke MentalStateManager.");
     }
 
     // ============================================================
-    //  REFRESH SEMUA KOTAK — dipanggil setiap kali stats berubah
+    //  REFRESH SEMUA KOTAK
     // ============================================================
     public void RefreshAllBoxes()
     {
@@ -124,7 +125,7 @@ public class CharacterPanelDisplay : MonoBehaviour
         UpdateBox1_StatusMental();
         UpdateBox3_Memory();
         UpdateBox4_Relationship();
-        // Kotak 2 (Trait) tidak perlu di-update karena tetap
+        // Kotak 2 tidak di-refresh karena trait tidak berubah di tengah game
     }
 
     // ============================================================
@@ -137,7 +138,6 @@ public class CharacterPanelDisplay : MonoBehaviour
         float trauma = _manager.trauma;
         float sanity = _manager.sanity;
 
-        // Tentukan kondisi dan pilih sprite + label
         if (sanity > 70f && trauma < 30f)
         {
             box1_StatusMental.sprite = statusStabil;
@@ -154,24 +154,58 @@ public class CharacterPanelDisplay : MonoBehaviour
             if (box1_Label != null) box1_Label.text = "Tertekan";
         }
 
-        // Aktifkan/nonaktifkan sprite berdasarkan apakah ada gambarnya
         box1_StatusMental.enabled = (box1_StatusMental.sprite != null);
     }
 
     // ============================================================
-    //  KOTAK 2 — TRAIT (dipasang sekali di Start)
+    //  KOTAK 2 — TRAIT (ngambil dari GameData)
     // ============================================================
     private void SetupTraitBox()
     {
         if (box2_Trait == null) return;
 
-        if (traitSprite != null)
-            box2_Trait.sprite = traitSprite;
+        // Cek apakah GameData ada dan trait sudah dipilih
+        if (GameData.Instance != null && GameData.Instance.selectedTrait != GameData.TraitType.None)
+        {
+            GameData.TraitType trait = GameData.Instance.selectedTrait;
 
-        if (box2_Label != null)
-            box2_Label.text = traitName;
+            // Pilih sprite sesuai trait
+            Sprite selectedSprite = GetTraitSprite(trait);
+            if (selectedSprite != null)
+                box2_Trait.sprite = selectedSprite;
+
+            // Label nama trait
+            if (box2_Label != null)
+                box2_Label.text = trait.ToString();
+
+            Debug.Log($"[CharacterPanel] Trait dari GameData: {trait}");
+        }
+        else
+        {
+            // Fallback: pakai sprite manual dari Inspector
+            if (traitSprite != null)
+                box2_Trait.sprite = traitSprite;
+            if (box2_Label != null)
+                box2_Label.text = traitName;
+
+            Debug.LogWarning("[CharacterPanel] GameData tidak ditemukan, pakai fallback trait.");
+        }
 
         box2_Trait.enabled = (box2_Trait.sprite != null);
+    }
+
+    // Mapping trait → sprite
+    private Sprite GetTraitSprite(GameData.TraitType trait)
+    {
+        switch (trait)
+        {
+            case GameData.TraitType.Introvert:  return traitSpriteIntrovert;
+            case GameData.TraitType.Empatik:    return traitSpriteEmpatik;
+            case GameData.TraitType.Penakut:    return traitSpritePenakut;
+            case GameData.TraitType.Pemberani:  return traitSpritePemberani;
+            case GameData.TraitType.Sensitif:   return traitSpriteSensitif;
+            default:                            return traitSprite;
+        }
     }
 
     // ============================================================
@@ -181,24 +215,20 @@ public class CharacterPanelDisplay : MonoBehaviour
     {
         if (box3_Memory == null) return;
 
-        // Pilih sprite berdasarkan kejadian terakhir yang dicatat
         switch (lastEvent)
         {
             case LastEvent.Bullying:
                 box3_Memory.sprite = memoryBullying;
                 if (box3_Label != null) box3_Label.text = "Bertemu Pembully";
                 break;
-
             case LastEvent.Healing:
                 box3_Memory.sprite = memoryHealing;
                 if (box3_Label != null) box3_Label.text = "Menulis Jurnal";
                 break;
-
             case LastEvent.Brave:
                 box3_Memory.sprite = memoryBrave;
                 if (box3_Label != null) box3_Label.text = "Tindakan Berani";
                 break;
-
             default:
                 box3_Memory.sprite = memoryNormal;
                 if (box3_Label != null) box3_Label.text = "Belum Ada Kejadian";
@@ -237,32 +267,20 @@ public class CharacterPanelDisplay : MonoBehaviour
     }
 
     // ============================================================
-    //  FUNGSI PUBLIK — dipanggil dari script lain saat ada kejadian
+    //  FUNGSI PUBLIK — dipanggil dari script lain
     // ============================================================
-
-    /// <summary>
-    /// Catat kejadian bullying → update kenangan (Kotak 3)
-    /// Panggil ini dari script scene saat player bertemu pembully.
-    /// Contoh: CharacterPanelDisplay.Instance.RecordEvent_Bullying();
-    /// </summary>
     public void RecordEvent_Bullying()
     {
         lastEvent = LastEvent.Bullying;
         UpdateBox3_Memory();
     }
 
-    /// <summary>
-    /// Catat kejadian healing → update kenangan (Kotak 3)
-    /// </summary>
     public void RecordEvent_Healing()
     {
         lastEvent = LastEvent.Healing;
         UpdateBox3_Memory();
     }
 
-    /// <summary>
-    /// Catat tindakan berani → update kenangan (Kotak 3)
-    /// </summary>
     public void RecordEvent_Brave()
     {
         lastEvent = LastEvent.Brave;

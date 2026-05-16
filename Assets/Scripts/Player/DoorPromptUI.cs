@@ -1,20 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-/// <summary>
-/// Attach ke GameObject "DoorPromptUI" (child dari Canvas Screen Space Overlay).
-/// Prompt akan otomatis ngikutin posisi pintu di layar, tepat di atasnya.
-///
-/// Hierarchy yang dibutuhin:
-///
-///   [Canvas] Screen Space - Overlay
-///   └── DoorPromptUI          ← script ini di sini
-///       └── PromptPanel       ← background panel
-///           ├── KeyBadge      ← Image kotak tombol "E"
-///           │   └── KeyText   ← TMP text "E"
-///           └── LabelText     ← TMP text "Masuk"
-/// </summary>
 public class DoorPromptUI : MonoBehaviour
 {
     [Header("Target")]
@@ -36,9 +21,7 @@ public class DoorPromptUI : MonoBehaviour
         _mainCam = Camera.main;
         _canvas = GetComponentInParent<Canvas>();
         _canvasRect = _canvas.GetComponent<RectTransform>();
-
-        // Sembunyiin di awal — DoorInteraction yang akan Show/Hide
-        gameObject.SetActive(false);
+        // Tidak ada SetActive di sini — DoorInteraction kontrol via parent canvas
     }
 
     private void LateUpdate()
@@ -49,11 +32,9 @@ public class DoorPromptUI : MonoBehaviour
 
     private void FollowDoor()
     {
-        // Convert posisi world pintu + offset ke screen point
         Vector3 worldPos = doorTransform.position + worldOffset;
         Vector3 screenPos = _mainCam.WorldToScreenPoint(worldPos);
 
-        // Kalau pintu di belakang kamera, sembunyiin
         if (screenPos.z < 0f)
         {
             promptPanel.gameObject.SetActive(false);
@@ -61,7 +42,6 @@ public class DoorPromptUI : MonoBehaviour
         }
         promptPanel.gameObject.SetActive(true);
 
-        // Convert screen point ke local point di canvas
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             _canvasRect,

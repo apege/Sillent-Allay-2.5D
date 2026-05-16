@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
 
 public class InventoryMenu : MonoBehaviour
 {
@@ -18,16 +16,17 @@ public class InventoryMenu : MonoBehaviour
 
     void Awake()
     {
-        // Kalau sudah ada instance lain, destroy yang baru (duplikat dari scene)
+        Debug.Log($"[InventoryMenu] Awake dipanggil! Instance ada: {Instance != null}");
+
         if (Instance != null && Instance != this)
         {
+            Debug.Log("[InventoryMenu] Duplikat ditemukan, destroy!");
             Destroy(this.gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        DontDestroyOnLoad(InventoryPanel);
+        DontDestroyOnLoad(this.transform.root.gameObject);
     }
 
     void OnEnable()
@@ -45,6 +44,10 @@ public class InventoryMenu : MonoBehaviour
         isOpen = false;
         if (InventoryPanel != null)
             InventoryPanel.SetActive(false);
+
+        // ← 3 baris tambahan
+        if (QuestCanvasManager.Instance != null)
+            QuestCanvasManager.Instance.gameObject.SetActive(scene.name != "StartMenu");
     }
 
     void Start()
@@ -55,6 +58,8 @@ public class InventoryMenu : MonoBehaviour
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "StartMenu") return;
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             ToggleInventory();
     }
@@ -66,6 +71,7 @@ public class InventoryMenu : MonoBehaviour
             Debug.LogError("InventoryPanel null!", this);
             return;
         }
+
         isOpen = !isOpen;
         InventoryPanel.SetActive(isOpen);
     }

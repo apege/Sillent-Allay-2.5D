@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Desa.unity
     guid: 82cd321d6514b904bb440a1cbe342284
   - enabled: 1
-    path: Assets/Scenes/Desa_Sekolah.unity
+    path: Assets/Scenes/Desa_Sekolah_1.unity
     guid: dc4fcb0ec5120df48b1e39ba07c96743
   - enabled: 1
     path: Assets/Scenes/Desa_Rumah_Nara.unity

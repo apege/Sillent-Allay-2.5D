@@ -44,8 +44,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Audio Settings")]
     public AudioSource audioSource;
+    [Tooltip("Suara jalan di rumput / tanah biasa")]
     public AudioClip walkSound;
+    [Tooltip("Suara lari di rumput / tanah biasa")]
     public AudioClip runSound;
+    [Tooltip("Suara jalan khusus di dalam sekolah (ubin/beton)")]
+    public AudioClip walkLantaiSound;
+    [Tooltip("Suara lari khusus di dalam sekolah (ubin/beton)")]
+    public AudioClip runLantaiSound;
     public float walkSoundInterval = 0.5f;  // Jeda antar step jalan
     public float runSoundInterval = 0.35f;   // Jeda antar step lari
     private float nextFootstepTime;
@@ -111,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
         jumpsRemaining = maxJumps;
 
-        // SET INITIAL ROTATION KE 90° (default facing right)
+        // SET INITIAL ROTATION KE 90Â° (default facing right)
         Vector3 rotation = transform.eulerAngles;
         rotation.y = 90f;
         transform.eulerAngles = rotation;
@@ -194,26 +200,26 @@ public class PlayerController : MonoBehaviour
             StartDash();
         }
 
-        // FIX BUAT Y = 90° DEFAULT
+        // FIX BUAT Y = 90Â° DEFAULT
         if (Mathf.Abs(horizontalInput) > 0.1f)
         {
             Vector3 rotation = transform.eulerAngles;
 
             if (horizontalInput > 0) // Input D = kanan (maju)
             {
-                rotation.y = 90f;  // Tetap di 90°
+                rotation.y = 90f;  // Tetap di 90Â°
                 isFacingRight = true;
             }
             else // Input A = kiri (mundur)
             {
-                rotation.y = 270f; // Balik 180° dari 90°
+                rotation.y = 270f; // Balik 180Â° dari 90Â°
                 isFacingRight = false;
             }
 
             transform.eulerAngles = rotation;
         }
 
-        PlayFootstepSound();  // PLAY FOOTSTEP SOUND
+        PlayFootstepSound();  // PLAY FOOTSTEP SOUND DETECT GROUND
         UpdateAnimations();
     }
 
@@ -229,19 +235,12 @@ public class PlayerController : MonoBehaviour
     {
         float currentMoveSpeed = (sprintAction != null && sprintAction.IsPressed()) ? sprintSpeed : moveSpeed;
 
-        // PERBAIKAN: Gunakan velocity langsung, lebih smooth dan konsisten
         float targetVelocityX = horizontalInput * currentMoveSpeed;
-
-        // Smoothing factor - makin tinggi makin responsive
         float smoothing = isGrounded ? 10f : 8f;
-
-        // Lerp velocity biar smooth tapi konsisten kiri-kanan
         float newVelocityX = Mathf.Lerp(rb.linearVelocity.x, targetVelocityX, Time.fixedDeltaTime * smoothing);
 
-        // Set velocity langsung (X aja, Y biarkan untuk gravity/jump)
         rb.linearVelocity = new Vector3(newVelocityX, rb.linearVelocity.y, 0f);
 
-        // Drag tetap dipake
         if (isGrounded)
         {
             rb.linearDamping = groundDrag;
@@ -264,7 +263,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded || coyoteTimeCounter > 0f)
         {
-            // Reset Y velocity aja, X tetap biar bisa loncat sambil jalan
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, 0f);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpsRemaining--;
@@ -291,19 +289,10 @@ public class PlayerController : MonoBehaviour
         }
 
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
         foreach (Collider enemy in hitEnemies)
         {
-            Debug.Log("Hit " + enemy.name);
-            // enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+            Debug.Log("Hit enemy: " + enemy.name);
         }
-
-        Invoke("ResetAttack", attackCooldown);
-    }
-
-    void ResetAttack()
-    {
-        isAttacking = false;
     }
 
     void StartDash()
@@ -311,14 +300,13 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         lastDashTime = Time.time;
 
-        // TRIGGER ANIMATION
+        float dashDirection = isFacingRight ? 1f : -1f;
+        rb.linearVelocity = new Vector3(dashDirection * dashSpeed, 0f, 0f);
+
         if (animator != null)
         {
             animator.SetTrigger("Dash");
         }
-
-        float dashDirection = isFacingRight ? 1f : -1f;
-        rb.linearVelocity = new Vector3(dashDirection * dashSpeed, 0f, 0f);
 
         Invoke("StopDash", dashDuration);
     }
@@ -328,48 +316,31 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
     }
 
-    void Flip()
-    {
-        isFacingRight = !isFacingRight;
-
-        Vector3 rotation = transform.eulerAngles;
-        rotation.y = isFacingRight ? 90f : 270f;
-        transform.eulerAngles = rotation;
-    }
-
     void PlayFootstepSound()
     {
-        if (audioSource == null || !isGrounded) return;
-
-        float actualSpeed = Mathf.Abs(rb.linearVelocity.x);
-
-        // CEK: lagi gerak DAN pencet input
-        bool isMoving = Mathf.Abs(horizontalInput) > 0.1f && actualSpeed > 0.5f;
-
-        // Kalo GA GERAK, langsung stop semua sound
-        if (!isMoving)
+        if (isGrounded && Mathf.Abs(horizontalInput) > 0.1f)
         {
-            if (audioSource.isPlaying)
+            if (Time.time >= nextFootstepTime)
             {
-                audioSource.Stop();
-            }
-            return;  // KELUAR langsung, ga usah lanjut
-        }
+                bool isSprinting = (sprintAction != null && sprintAction.IsPressed());
+                AudioClip clipToPlay = isSprinting ? runSound : walkSound;
 
-        // Kalo GERAK dan udah waktunya play sound
-        if (Time.time >= nextFootstepTime)
-        {
-            // Kalo lagi lari
-            if (actualSpeed > moveSpeed + 1f && runSound != null)
-            {
-                audioSource.PlayOneShot(runSound, 0.7f);  // Volume 0.7
-                nextFootstepTime = Time.time + 0.5f;  // Tunggu 0.5 detik
-            }
-            // Kalo jalan biasa
-            else if (walkSound != null)
-            {
-                audioSource.PlayOneShot(walkSound, 0.5f);  // Volume 0.5
-                nextFootstepTime = Time.time + 0.6f;  // Tunggu 0.6 detik
+                RaycastHit hit;
+                if (Physics.Raycast(groundCheck.position + Vector3.up * 0.1f, Vector3.down, out hit, 0.5f))
+                {
+                    if (hit.collider.CompareTag("Lantai"))
+                    {
+                        clipToPlay = isSprinting ? runLantaiSound : walkLantaiSound;
+                    }
+                }
+
+                if (clipToPlay != null)
+                {
+                    audioSource.PlayOneShot(clipToPlay);
+                }
+
+                float interval = isSprinting ? runSoundInterval : walkSoundInterval;
+                nextFootstepTime = Time.time + interval;
             }
         }
     }
@@ -378,11 +349,11 @@ public class PlayerController : MonoBehaviour
     {
         if (animator == null) return;
 
-        float actualSpeed = Mathf.Abs(rb.linearVelocity.x);
-
-        animator.SetFloat("Speed", actualSpeed);
-
-        bool isSprinting = actualSpeed > moveSpeed + 1f;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        animator.SetBool("IsGrounded", isGrounded);
+        animator.SetBool("IsDashing", isDashing);
+        
+        bool isSprinting = (sprintAction != null && sprintAction.IsPressed() && Mathf.Abs(horizontalInput) > 0.1f);
         animator.SetBool("IsSprinting", isSprinting);
     }
 
@@ -390,26 +361,14 @@ public class PlayerController : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
         }
 
         if (attackPoint != null)
         {
-            Gizmos.color = Color.blue;
+            Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
-    }
-
-    void OnEnable()
-    {
-        if (playerInput != null)
-            playerInput.actions.Enable();
-    }
-
-    void OnDisable()
-    {
-        if (playerInput != null)
-            playerInput.actions.Disable();
     }
 }
